@@ -37,4 +37,9 @@ public class BookKeeper {
 		return invoice;
 	}
 
+	public BookKeeper(InvoiceFactory invoiceFactory) {
+		super();
+		this.invoiceFactory = invoiceFactory;
+	}
+
 }
