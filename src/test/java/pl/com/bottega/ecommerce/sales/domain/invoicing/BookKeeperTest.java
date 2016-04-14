@@ -35,5 +35,15 @@ public class BookKeeperTest {
 		bookKeeper.issuance(invoiceRequest, taxPolicy);
 		assertThat(taxPolicy.callCounter, is(1));
 	}
+	
+	@Test
+	public void dlaZadaniaZJednymProduktemFakturaZawieraJednaPozycje() {
+		BookKeeper bookKeeper = new BookKeeper(new InvoiceFactory());
+		InvoiceRequest invoiceRequest = new InvoiceRequest(null);
+		invoiceRequest.add(new RequestItem(productData, 1, new Money(BigDecimal.ONE)));
+		TestTaxPolicy taxPolicy = new TestTaxPolicy();
+		Invoice invoice = bookKeeper.issuance(invoiceRequest, taxPolicy);
+		assertThat(invoice.getItems().size(), is(1));
+	}
 
 }
